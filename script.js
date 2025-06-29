@@ -69,8 +69,7 @@ function calculateAnimal(name, age) {
 // Fonction pour charger les données depuis GitHub
 async function loadGithubData() {
     try {
-        // Remplace cette URL par ton dépôt GitHub réel
-        const response = await fetch('https://raw.githubusercontent.com/elkast/SEO-Challenge/main/users-data.json');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzqq336YFu9EJIKK2qUj6LhR_0SosFcfyAlgorzCa2WNKUqaGVGirlNmdHfW4iy42vpYQ/exec');
         if (response.ok) {
             githubData = await response.json();
             console.log('Données GitHub chargées:', githubData);
