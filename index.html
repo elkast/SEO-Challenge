@@ -1,0 +1,91 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO CHALLENGE 🔥🔥 - Quel Animal Es-Tu ?</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header SEO Challenge -->
+        <div class="seo-header">
+            <h1>SEO CHALLENGE 🔥🔥</h1>
+        </div>
+
+        <!-- Écran d'accueil -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1>🦁 Quel Animal Es-Tu ? 🐼</h1>
+                <p>Découvre ton animal spirituel basé sur ton nom et ton âge !</p>
+                <button id="start-btn" class="btn primary">Commencer</button>
+            </div>
+        </div>
+
+        <!-- Formulaire -->
+        <div id="form-screen" class="screen">
+            <div class="form-content">
+                <h2>Dis-nous en plus sur toi</h2>
+                <form id="user-form">
+                    <div class="input-group">
+                        <label for="name">Ton prénom</label>
+                        <input type="text" id="name" name="name" required placeholder="Ex: Marie">
+                    </div>
+                    <div class="input-group">
+                        <label for="age">Ton âge</label>
+                        <input type="number" id="age" name="age" required min="1" max="120" placeholder="Ex: 25">
+                    </div>
+
+                    <!-- Photo upload section -->
+                    <div class="photo-section">
+                        <h3>📸 Optionnel : Upload ta photo</h3>
+                        <p>Découvre la matière qui te ressemble !</p>
+                        <div class="photo-upload">
+                            <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                            <div id="photo-drop-zone" class="photo-drop-zone">
+                                <div class="photo-placeholder">
+                                    <span>📷</span>
+                                    <p>Clique ou glisse ta photo ici</p>
+                                </div>
+                                <img id="photo-preview" class="photo-preview" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn primary">Découvrir mon animal</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Résultat -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <h2>Ton animal spirituel est...</h2>
+                <div class="animal-card">
+                    <div class="animal-emoji" id="animal-emoji">🦁</div>
+                    <h3 id="animal-name">Lion</h3>
+                    <p id="animal-description">Tu es un leader naturel, courageux et protecteur !</p>
+                </div>
+
+                <!-- Material result section -->
+                <div id="material-result" class="material-card" style="display: none;">
+                    <h3>Ta matière correspondante :</h3>
+                    <div class="material-info">
+                        <div class="material-icon" id="material-icon">🪨</div>
+                        <h4 id="material-name">Marbre</h4>
+                        <p id="material-description">Élégant et intemporel, tu as une beauté naturelle !</p>
+                    </div>
+                </div>
+
+                <div class="share-section">
+                    <p>Partage avec tes amis !</p>
+                    <button id="share-btn" class="btn secondary">📱 Partager le lien</button>
+                    <button id="restart-btn" class="btn primary">🔄 Recommencer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
