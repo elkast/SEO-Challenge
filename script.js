@@ -69,7 +69,8 @@ function calculateAnimal(name, age) {
 // Fonction pour charger les données depuis GitHub
 async function loadGithubData() {
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbzqq336YFu9EJIKK2qUj6LhR_0SosFcfyAlgorzCa2WNKUqaGVGirlNmdHfW4iy42vpYQ/exec');
+        // Remplace cette URL par ton dépôt GitHub réel
+        const response = await fetch('https://raw.githubusercontent.com/username/repo/main/users-data.json');
         if (response.ok) {
             githubData = await response.json();
             console.log('Données GitHub chargées:', githubData);
@@ -315,6 +316,12 @@ restartBtn.addEventListener('click', () => {
     photoPreview.style.display = 'none';
     photoDropZone.querySelector('.photo-placeholder').style.display = 'block';
     materialResult.style.display = 'none';
+    
+    // Remettre le titre original
+    document.querySelector('#result-screen h2').textContent = 'Ton animal spirituel est...';
+    // Remettre le texte original du bouton
+    document.getElementById('restart-btn').textContent = '🔄 Recommencer';
+    
     showScreen(welcomeScreen);
 });
 
@@ -328,12 +335,34 @@ window.addEventListener('load', () => {
     const isShared = urlParams.get('shared');
     
     if (isShared && sharedName && sharedAge) {
-        // Pré-remplir le formulaire avec les données partagées
-        document.getElementById('name').value = sharedName;
-        document.getElementById('age').value = sharedAge;
-        showScreen(formScreen);
+        // Afficher directement le résultat de la personne qui a partagé
+        const animal = calculateAnimal(sharedName, sharedAge);
         
-        // Nettoyer l'URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+        // Mettre à jour l'écran de résultat avec les données partagées
+        document.getElementById('animal-emoji').textContent = animal.emoji;
+        document.getElementById('animal-name').textContent = animal.name;
+        document.getElementById('animal-description').textContent = animal.description;
+        
+        // Modifier le titre pour montrer qui a partagé
+        document.querySelector('#result-screen h2').textContent = `${sharedName} est ${animal.name} ${animal.emoji} !`;
+        
+        // Stocker les données
+        sessionStorage.setItem('userName', sharedName);
+        sessionStorage.setItem('userAge', sharedAge);
+        sessionStorage.setItem('userAnimal', JSON.stringify(animal));
+        
+        // Cacher la matière puisqu'on n'a pas la photo
+        materialResult.style.display = 'none';
+        
+        // Modifier le texte du bouton restart pour encourager à essayer
+        document.getElementById('restart-btn').textContent = '🎯 À mon tour !';
+        
+        // Afficher l'écran de résultat
+        showScreen(resultScreen);
+        
+        // Nettoyer l'URL après 3 secondes
+        setTimeout(() => {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }, 3000);
     }
 });

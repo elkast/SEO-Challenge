@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu Animal</title>
+</head>
+<body>
+  <h2>Quel animal es-tu ?</h2>
+  <form id="formulaire">
+    Nom : <input type="text" id="nom" required><br>
+    Âge : <input type="number" id="age" required><br>
+    <button type="submit">Découvrir ton animal</button>
+  </form>
+
+  <h3 id="resultat"></h3>
+
+  <script>
+    const animaux = ["Lion", "Tigre", "Éléphant", "Panda", "Chacal", "Girafe"];
+
+    const URL_SHEET = "https://script.google.com/macros/s/AKfycbzqq336YFu9EJIKK2qUj6LhR_0SosFcfyAlgorzCa2WNKUqaGVGirlNmdHfW4iy42vpYQ/exec";
+
+    document.getElementById("formulaire").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      const nom = document.getElementById("nom").value;
+      const age = document.getElementById("age").value;
+      const animal = animaux[Math.floor(Math.random() * animaux.length)];
+
+      document.getElementById("resultat").innerText = `Ton animal est : ${animal}`;
+
+      // Envoi vers Google Sheets
+      fetch(URL_SHEET, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ nom: nom, age: age, animal: animal })
+      })
+      .then(res => res.text())
+      .then(data => console.log("Données enregistrées :", data))
+      .catch(err => console.error("Erreur d’envoi :", err));
+    });
+  </script>
+</body>
+</html>
